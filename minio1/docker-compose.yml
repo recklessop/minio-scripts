@@ -1,0 +1,36 @@
+---
+version: "2.1"
+services:
+  minio1:
+    image: minio/minio
+    container_name: minio1
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /mnt/disk1:/disk1
+      - /mnt/disk2:/disk2
+      - /mnt/disk3:/disk3
+      - /mnt/disk4:/disk4
+    restart: unless-stopped
+    expose:
+      - 9000
+    networks:
+      - web
+    env_file:
+      - keys.env
+    command: server /disk{1...4}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.minio1.rule=Host(`minio1.your.fqdn.com`)"
+      - "traefik.http.routers.minio1.entrypoints=websecure"
+      - "traefik.http.routers.minio1.tls.certresolver=myresolver"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+networks:
+  web:
+    external: true
