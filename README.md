@@ -10,7 +10,7 @@ Traefik, once configured with your cloudflare information, will get SSL certific
 
 To start everything you can run:
 
-docker-compose up -d traefik2/docker-compose.yml minio1/docker-compose.yml minio2/docker.compose.yml
+docker-compose up -d -f traefik2/docker-compose.yml minio1/docker-compose.yml minio2/docker.compose.yml
 
 ## Scripts folder
 
