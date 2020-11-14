@@ -8,10 +8,10 @@ services:
       - PUID=1000
       - PGID=1000
     volumes:
-      - /mnt/disk1:/disk1
-      - /mnt/disk2:/disk2
-      - /mnt/disk3:/disk3
-      - /mnt/disk4:/disk4
+      - /mnt/disk1/minio1:/disk1
+      - /mnt/disk2/minio1:/disk2
+      - /mnt/disk3/minio1:/disk3
+      - /mnt/disk4/minio1:/disk4
     restart: unless-stopped
     expose:
       - 9000
